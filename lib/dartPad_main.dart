@@ -47,23 +47,18 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class _ScalingBox extends StatelessWidget {
-  //ALL CREDIT FOR THIS CLASS GOES TO Paweł Szymański from Medium
-  //https://stasheq.medium.com/scale-whole-app-or-widget-contents-to-a-screen-size-in-flutter-e3be161b5ab4
   @override
   Widget build(BuildContext context) {
     double logicWidth = 600;
     double logicHeight = 700;
     return SizedBox.expand(
-      child: Container(
-        color: Colors.blueGrey,
-        child: FittedBox(
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
-          child: SizedBox(
-            width: logicWidth,
-            height: logicHeight,
-            child: const ScaffoldContent(),
-          ),
+      child: FittedBox(
+        fit: BoxFit.fill,
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: logicWidth,
+          height: logicHeight,
+          child: const ScaffoldContent(),
         ),
       ),
     );
