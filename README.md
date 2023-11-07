@@ -1,6 +1,6 @@
 # My Simple Calculator
 
-### Why I built this app?
+## Why I built this app?
 While researching for ways to build application across multiple platforms I came across flutter, which used *dart* to program application in various systems using one language: dart. This seemed appeal as opposed to learning various code languages to create a simple app across devices. This is my first Flutter application, with primary objection of becoming familiar with the widget structure of flutter and dart syntax. 
 
 ## App Intro
@@ -22,9 +22,9 @@ There are two ways easy methods you can test this simple calculator yourself (*w
 
 2. [DartPad: an online code editor for Dart (it can run *flutter* programs)](https://dartpad.dev/?id)
 
-If you have no intent on going through the code and want a **fast, hassle free test of the application, I recommend dart pad** (I even added a file just for it by combining all dart files together, just copy & paste and voilà, done). 
+If you have no intent on going through the code and want a **fast, hassle free test of the application, I recommend dart pad** (I even added a file just for it by combining all dart files together, just copy & paste and voilà, done). [DartPad File is here](lib/dartPad_main.dart).
 
-However, if you want to look through the code, a more organize way of doing it would be through FlutLab (just import the project to your workspace from the rep url and change a few dependencies... mainly the flutter version from 10.1.3 to 10.1.0). This method is a bit lengthier though so be warned.
+However, if you want to look through the code, a more organize way of doing it would be through FlutLab (just import the project to your workspace from the rep url and change a few dependencies... mainly the flutter version from 10.1.3 to 10.1.0). This method is a bit lengthier (about 10-20mins if you watch tutorials) though so be warned.
 
 
 ## Thanks for reading
