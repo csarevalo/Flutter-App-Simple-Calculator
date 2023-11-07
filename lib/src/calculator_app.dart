@@ -20,14 +20,14 @@ class CalculatorApp extends StatelessWidget {
           fontFamily: 'Poppins',
           colorScheme: ThemeData.dark(useMaterial3: true).colorScheme,
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -38,41 +38,79 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return SafeArea(
+      child: _ScalingBox(),
+    );
+  }
+}
+
+class _ScalingBox extends StatelessWidget {
+  //ALL CREDIT FOR THIS CLASS GOES TO Paweł Szymański from Medium
+  //https://stasheq.medium.com/scale-whole-app-or-widget-contents-to-a-screen-size-in-flutter-e3be161b5ab4
+  @override
+  Widget build(BuildContext context) {
+    double logicWidth = 600;
+    double logicHeight = 700;
+    return SizedBox.expand(
+      child: Container(
+        color: Colors.blueGrey,
+        child: FittedBox(
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: logicWidth,
+            height: logicHeight,
+            child: const ScaffoldContent(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ScaffoldContent extends StatelessWidget {
+  const ScaffoldContent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     Function calkeyOnClick = appState.pressedKeypad;
 
     final theme = Theme.of(context);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Center(
-            child: Text(
-              "My Simple Calculator",
-            ),
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            "My Simple Calculator",
           ),
-          backgroundColor: theme.colorScheme.primaryContainer,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextDisplayContainer(
-              inputText: appState.history,
-              textType: 1,
-            ),
-            TextDisplayContainer(
-              inputText: appState.textDisp,
-              textType: 2,
-            ),
-            TextDisplayContainer(
-              inputText: appState.shortDisplay,
-              textType: 3,
-            ),
-            const SizedBox(height: 10),
-            CalcKeys(
-              callback: calkeyOnClick,
-            ),
-            const SizedBox(height: 5),
-          ],
-        ));
+        backgroundColor: theme.colorScheme.primaryContainer,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextDisplayContainer(
+            inputText: appState.history,
+            textType: 1,
+          ),
+          TextDisplayContainer(
+            inputText: appState.textDisp,
+            textType: 2,
+          ),
+          TextDisplayContainer(
+            inputText: appState.shortDisplay,
+            textType: 3,
+          ),
+          const SizedBox(height: 10),
+          CalcKeys(
+            callback: calkeyOnClick,
+          ),
+          const SizedBox(height: 5),
+        ],
+      ),
+    );
   }
 }

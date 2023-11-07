@@ -24,7 +24,7 @@ class MyAppState extends ChangeNotifier {
 
   NumberFormat updateFormat(num num, [int maxDigits = 9, int minDigits = -1]) {
     //max num = 999e+395
-    // NumberFormat numberFormat = NumberFormat("########0.0########E0##", 'en_us');
+    // NumberFormat decFormat = NumberFormat("########0.########", 'en_us');
     NumberFormat decFormat = NumberFormat.decimalPattern('en_us');
     NumberFormat sciFormat = NumberFormat.scientificPattern('en_us');
     NumberFormat numberFormat; // OUTPUT
@@ -164,24 +164,25 @@ class MyAppState extends ChangeNotifier {
       // numberFormat.minimumSignificantDigitsStrict = true;
       numberFormat.minimumSignificantDigits = minSigFigs;
     } else if (format == 'dec') {
-      numberFormat = decFormat;
+      numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
+      if (numStr.length > maxDigits) {
+        numberFormat = sciFormat;
+      } else {
+        numberFormat = decFormat;
+      }
       numberFormat.significantDigitsInUse = true;
       numberFormat.maximumSignificantDigits = maxSigFigs;
 
-      // numStr = numberFormat.format(num);
-      // if (numStr.contains('.')) {
-      //   //after decimal dot
-      //   numStr.split('.')[1];
+      //FIXME: attempting to mess with the minimum significat digits
+      // produces unnecessary zeros
+
+      // if (!minDigits.isNegative && num == 0) {
+      //   minSigFigs = minDigits;
       // } else {
-      //   //no decimal
+      //   minSigFigs = maxSigFigs;
       // }
-      if (!minDigits.isNegative && num == 0) {
-        minSigFigs = minDigits;
-      } else {
-        minSigFigs = maxSigFigs;
-      }
-      // numberFormat.minimumSignificantDigitsStrict = true;
-      numberFormat.minimumSignificantDigits = minSigFigs;
+      // // numberFormat.minimumSignificantDigitsStrict = true;
+      // numberFormat.minimumSignificantDigits = minSigFigs;
     } else {
       throw Exception('Invalid format');
     }
@@ -192,27 +193,9 @@ class MyAppState extends ChangeNotifier {
     //==============================================================
     // numberFormat.significantDigitsInUse = true;
     // numberFormat.maximumSignificantDigits = maxSigFigs;
-    // numberFormat.minimumSignificantDigitsStrict = true;
-    // numberFormat.minimumSignificantDigits = minSigFigs;
+    // numberFormat.minimumSignificantDigitsStrict = true; //issues
+    // numberFormat.minimumSignificantDigits = minSigFigs; //issues
     //==============================================================
-
-    // if (num.toString().contains('.')) {
-    //   numberFormat.minimumSignificantDigitsStrict = true;
-    //   if (num.toString().length < maxDigits) {
-    //     // display small numbers (e.g. 0.001)
-    //     var tempString = num.toString().replaceAll(RegExp(r'[^0-9]'), '');
-    //     if (tempString.contains('e')) {
-    //       numberFormat.minimumSignificantDigits =
-    //           tempString.split('e')[0].length - 2;
-    //     } else {
-    //       numberFormat.minimumSignificantDigits = tempString.length - 2;
-    //     }
-    //   } else {
-    //     numberFormat.minimumSignificantDigits = maxDigits;
-    //   }
-    // } else {
-    //   numberFormat.minimumSignificantDigitsStrict = false;
-    // }
 
     /// USELESS VALUES
     // numberFormat.maximumIntegerDigits = maxDigits;
