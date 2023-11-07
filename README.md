@@ -1,5 +1,4 @@
 # My Simple Calculator
-[test](lib/dartPad_main.dart)
 
 ### Why I built this app?
 While researching for ways to build application across multiple platforms I came across flutter, which used *dart* to program application in various systems using one language: dart. This seemed appeal as opposed to learning various code languages to create a simple app across devices. This is my first Flutter application, with primary objection of becoming familiar with the widget structure of flutter and dart syntax. 
