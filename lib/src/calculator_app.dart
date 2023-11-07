@@ -52,16 +52,13 @@ class _ScalingBox extends StatelessWidget {
     double logicWidth = 600;
     double logicHeight = 700;
     return SizedBox.expand(
-      child: Container(
-        color: Colors.blueGrey,
-        child: FittedBox(
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
-          child: SizedBox(
-            width: logicWidth,
-            height: logicHeight,
-            child: const ScaffoldContent(),
-          ),
+      child: FittedBox(
+        fit: BoxFit.fill,
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: logicWidth,
+          height: logicHeight,
+          child: const ScaffoldContent(),
         ),
       ),
     );
