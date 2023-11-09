@@ -50,7 +50,6 @@ class MyAppState extends ChangeNotifier {
     // Important for output
     String format = '';
     int maxSigFigs;
-    int minSigFigs;
     // For ease of logic
     int expIndex = -1;
     int decIndex = -1;
@@ -159,7 +158,6 @@ class MyAppState extends ChangeNotifier {
       } else {
         maxSigFigs = maxDigits - numExpDigits;
       }
-      minSigFigs = maxSigFigs;
       numberFormat.maximumSignificantDigits = maxSigFigs;
       // numberFormat.minimumSignificantDigitsStrict = true;
       // numberFormat.minimumSignificantDigits = minSigFigs;
