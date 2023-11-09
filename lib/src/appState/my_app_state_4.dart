@@ -100,6 +100,7 @@ class MyAppState extends ChangeNotifier {
               } else {
                 maxSigFigs = maxDigits;
               }
+              //FIXME: Check how our sig figs look
             } else {
               // When interger portion of the decimal has more digits than allowed
               // USE SCIENTIFIC FORMAT
@@ -142,14 +143,19 @@ class MyAppState extends ChangeNotifier {
         maxSigFigs = maxDigits - numExpDigits;
       }
       numberFormat.maximumSignificantDigits = maxSigFigs;
-    } else if (format == 'dec') {
-      numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
-      if (numStr.length > maxDigits) {
-        numberFormat = sciFormat;
-      } else {
-        numberFormat = decFormat;
-      }
+    }
+    /////////////////////////////////////////////////
+    else if (format == 'dec') {
+      numberFormat = decFormat;
       numberFormat.significantDigitsInUse = true;
+      numberFormat.maximumSignificantDigits = maxSigFigs;
+
+      numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
+      debugPrint(numStr);
+      if (numStr.length > maxDigits) {
+        // Adjust max sig figs if we're showing more digits than intended
+        maxSigFigs = maxDigits - (numStr.length - maxDigits);
+      }
       numberFormat.maximumSignificantDigits = maxSigFigs;
     } else {
       throw Exception('Invalid format');
