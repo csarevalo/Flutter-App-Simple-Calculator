@@ -475,14 +475,19 @@ class MyAppState extends ChangeNotifier {
         maxSigFigs = maxDigits - numExpDigits;
       }
       numberFormat.maximumSignificantDigits = maxSigFigs;
-    } else if (format == 'dec') {
-      numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
-      if (numStr.length > maxDigits) {
-        numberFormat = sciFormat;
-      } else {
-        numberFormat = decFormat;
-      }
+    }
+    /////////////////////////////////////////////////
+    else if (format == 'dec') {
+      numberFormat = decFormat;
       numberFormat.significantDigitsInUse = true;
+      numberFormat.maximumSignificantDigits = maxSigFigs;
+
+      numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
+      // debugPrint(numStr);
+      if (numStr.length > maxDigits) {
+        // Adjust max sig figs if we're showing more digits than intended
+        maxSigFigs = maxDigits - (numStr.length - maxDigits);
+      }
       numberFormat.maximumSignificantDigits = maxSigFigs;
     } else {
       throw Exception('Invalid format');
@@ -550,7 +555,6 @@ class MyAppState extends ChangeNotifier {
             btn == '=') {
           prevRes = num.parse(tempDisp);
           textDisp = tempDisp;
-          //FIX ME PLEASE: show correct format
           _numFormat = updateFormat(prevRes!);
           shortDisplay = _numFormat.format(prevRes);
 
@@ -616,7 +620,6 @@ class MyAppState extends ChangeNotifier {
             } else {
               // Delete last char from textDisp
               textDisp = textDisp.substring(0, textDisp.length - 1);
-              //FIX ME PLEASE: This short display should be formatted
               if (textDisp.isNotEmpty) {
                 tempNum = num.parse(textDisp);
               } else {
@@ -726,7 +729,6 @@ class MyAppState extends ChangeNotifier {
                 // drop flag after handling
                 isError = false;
               } else {
-                //FIX ME PLEASE: should only show 9 digits
                 _numFormat = updateFormat(res);
                 shortDisplay = _numFormat.format(res);
               }
@@ -800,7 +802,6 @@ class MyAppState extends ChangeNotifier {
             }
         } // end of switch-case statements
         // Edit display right after adding/editing new digits
-        //FIX ME PLEASE: make input a minimumNumber of digits
         /// Limit: 2^(63) -> num.parse(is the limiter);
         tempNum = num.parse(textDisp);
         _numFormat = updateFormat(
