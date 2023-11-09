@@ -151,7 +151,7 @@ class MyAppState extends ChangeNotifier {
       numberFormat.maximumSignificantDigits = maxSigFigs;
 
       numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
-      debugPrint(numStr);
+      // debugPrint(numStr);
       if (numStr.length > maxDigits) {
         // Adjust max sig figs if we're showing more digits than intended
         maxSigFigs = maxDigits - (numStr.length - maxDigits);
