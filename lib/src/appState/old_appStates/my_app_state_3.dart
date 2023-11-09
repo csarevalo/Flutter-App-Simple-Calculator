@@ -106,7 +106,7 @@ class MyAppState extends ChangeNotifier {
               } else {
                 // When the first int-digit == 0, we need to check
                 // how many 0's before the first non-zero value (significant)
-                /// debugPrint('scrutinize: ${digits.indexOf(RegExp('r[^0]'))}');
+                debugPrint('scrutinize: ${digits.indexOf(RegExp('r[^0]'))}');
                 if (digits.indexOf(RegExp('r[^0]')) <= maxDigits) {
                   // USE DECIMAL FORMAT when the first none-zero value
                   // is in a place <= max-num-digits to be shown
@@ -162,7 +162,7 @@ class MyAppState extends ChangeNotifier {
       minSigFigs = maxSigFigs;
       numberFormat.maximumSignificantDigits = maxSigFigs;
       // numberFormat.minimumSignificantDigitsStrict = true;
-      numberFormat.minimumSignificantDigits = minSigFigs;
+      // numberFormat.minimumSignificantDigits = minSigFigs;
     } else if (format == 'dec') {
       numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
       if (numStr.length > maxDigits) {
