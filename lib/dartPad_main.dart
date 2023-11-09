@@ -519,59 +519,58 @@ class MyAppState extends ChangeNotifier {
     String tempBtn;
     num tempNum;
 
-    //Handle errors first and foremost
-    if (btn == 'reset') {
-      debugPrint('resetting');
-      history = '';
-      textDisp = '0';
-
-      shortDisplay = '0';
-      decDisp = '0';
-      dispRes = false;
-
-      res = 0;
-      prevRes = null;
-      num1 = null;
-      num2 = null;
-      operand = '';
-
-      return;
-    } else if (textDisp == 'NaN' ||
-        res.isNaN ||
-        textDisp == 'Infinity' ||
-        res.isInfinite) {
-      // save important vals
-      tempDisp = textDisp;
-      tempBtn = btn;
-      // Recursively reset myself
-      pressedKeypad(btn = 'reset');
-      // Re-assign valid values
-      if (tempDisp.isNotEmpty &&
-          (tempDisp != 'NaN' || tempDisp != 'Infinity')) {
-        if (btn == '/' ||
-            btn == 'x' ||
-            btn == '–' ||
-            btn == '+' ||
-            btn == '=') {
-          prevRes = num.parse(tempDisp);
-          textDisp = tempDisp;
-          _numFormat = updateFormat(prevRes!);
-          shortDisplay = _numFormat.format(prevRes);
-
-          dispRes = true; // bc we are showing new num
-          if (btn != '=') {
-            operand = tempBtn;
-          }
-        }
-      }
-      // remember btn
-      btn = tempBtn;
-    } // end of error checking
-
     //================================================
     //===== DO THIS TO NEVER SHOW ERRORS TO USER =====
     //================================================
     try {
+      //Handle errors first and foremost
+      if (btn == 'reset') {
+        debugPrint('resetting');
+        history = '';
+        textDisp = '0';
+
+        shortDisplay = '0';
+        decDisp = '0';
+        dispRes = false;
+
+        res = 0;
+        prevRes = null;
+        num1 = null;
+        num2 = null;
+        operand = '';
+
+        return;
+      } else if (textDisp == 'NaN' ||
+          res.isNaN ||
+          textDisp == 'Infinity' ||
+          res.isInfinite) {
+        // save important vals
+        tempDisp = textDisp;
+        tempBtn = btn;
+        // Recursively reset myself
+        pressedKeypad(btn = 'reset');
+        // Re-assign valid values
+        if (tempDisp.isNotEmpty &&
+            (tempDisp != 'NaN' || tempDisp != 'Infinity')) {
+          if (btn == '/' ||
+              btn == 'x' ||
+              btn == '–' ||
+              btn == '+' ||
+              btn == '=') {
+            prevRes = num.parse(tempDisp);
+            textDisp = tempDisp;
+            _numFormat = updateFormat(prevRes!);
+            shortDisplay = _numFormat.format(prevRes);
+
+            dispRes = true; // bc we are showing new num
+            if (btn != '=') {
+              operand = tempBtn;
+            }
+          }
+        }
+        // remember btn
+        btn = tempBtn;
+      } // end of error checking
       //=================================================
       //============== SPECIAL ACTION BTNS ==============
       //=================================================
@@ -721,10 +720,10 @@ class MyAppState extends ChangeNotifier {
               num1 = null;
               num2 = null;
               if (isError) {
-                _numFormat = updateFormat(res);
+                // DO NOT FORMAT: INVALID RESULT
+                // _numFormat = updateFormat(res);
                 shortDisplay = _numFormat.format(res);
-
-                shortDisplay = "ERROR: $shortDisplay";
+                shortDisplay = "ERROR ($shortDisplay)";
                 decDisp = "ERROR";
                 // drop flag after handling
                 isError = false;
