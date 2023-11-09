@@ -483,10 +483,15 @@ class MyAppState extends ChangeNotifier {
       numberFormat.maximumSignificantDigits = maxSigFigs;
 
       numStr = decFormat.format(num).replaceAll(RegExp(r'[^0-9]'), '');
-      // debugPrint(numStr);
+      debugPrint(
+          'numStr: $numStr with $maxSigFigs sig figs but ${numStr.length} digits');
       if (numStr.length > maxDigits) {
         // Adjust max sig figs if we're showing more digits than intended
-        maxSigFigs = maxDigits - (numStr.length - maxDigits);
+        var leadingZeros =
+            numStr.length - numStr.replaceAll(RegExp(r'^0+(?=.)'), '').length;
+        debugPrint('leading zeros is $leadingZeros');
+        // maxSigFigs = maxDigits - (numStr.length - maxDigits);
+        maxSigFigs = maxDigits - leadingZeros;
       }
       numberFormat.maximumSignificantDigits = maxSigFigs;
     } else {
