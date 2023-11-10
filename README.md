@@ -15,8 +15,8 @@ Some key features include: history, raw number, and main display.
 
 1. History is shown using only raw numbers to not cause any confusion when looking at scientific notation. The primary purpose of history is to always remind the user of what calculations they have perform up to the current instance.
 
-## Try it yourself
-There are two ways easy methods you can test this simple calculator yourself (*without installing anything on your device*):
+## Try The Code Yourself
+Want to make some brief changes to the code, but don't want to go through the hassle of installing flutter. There are two ways easy methods you can test this simple calculator yourself (*without installing anything on your device*):
 
 1. [FlutLab: an online IDE for Flutter](https://flutlab.io/)
 
