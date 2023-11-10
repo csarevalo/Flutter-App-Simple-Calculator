@@ -4,7 +4,7 @@
 While researching for ways to build application across multiple platforms I came across flutter, which used *dart* to program application in various systems using one language: dart. This seemed appeal as opposed to learning various code languages to create a simple app across devices. This is my first Flutter application, with primary objection of becoming familiar with the widget structure of flutter and dart syntax. 
 
 ## App Intro
-The goal of this Flutter project is to develop a calculator app with simple features. It can perform multiplication, division, addition, and subtraction. It also handles decimal numbers, as well as negative numbers.  
+The goal of this Flutter project is to develop a calculator app with simple features. It can perform multiplication, division, addition, and subtraction. It also handles decimal numbers, as well as negative numbers. [Try it yourself](https://csarevalo.github.io/Flutter-Apps-Simple-Calculator/)!
 
 ### Features
 Some key features include: history, raw number, and main display.
