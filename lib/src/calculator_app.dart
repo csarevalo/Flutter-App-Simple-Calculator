@@ -51,7 +51,7 @@ class _ScalingBox extends StatelessWidget {
     double logicHeight = 700;
     return SizedBox.expand(
       child: FittedBox(
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
         alignment: Alignment.center,
         child: SizedBox(
           width: logicWidth,
