@@ -38,8 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: _ScalingBox(),
+    return const SafeArea(
+      child: ScaffoldContent(),
+      //_ScalingBox(),
     );
   }
 }
@@ -74,37 +75,53 @@ class ScaffoldContent extends StatelessWidget {
     Function calkeyOnClick = appState.pressedKeypad;
 
     final theme = Theme.of(context);
+    double logicWidth = 450;
+    double logicHeight = 600;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "My Simple Calculator",
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text(
+              "My Simple Calculator",
+            ),
+          ),
+          backgroundColor: theme.colorScheme.primaryContainer,
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: logicWidth,
+              height: logicHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(height: 10),
+                  TextDisplayContainer(
+                    inputText: appState.history,
+                    textType: 1,
+                  ),
+                  TextDisplayContainer(
+                    inputText: appState.textDisp,
+                    textType: 2,
+                  ),
+                  TextDisplayContainer(
+                    inputText: appState.shortDisplay,
+                    textType: 3,
+                  ),
+                  const SizedBox(height: 10),
+                  CalcKeys(
+                    callback: calkeyOnClick,
+                  ),
+                  const SizedBox(height: 5),
+                ],
+              ),
+            ),
           ),
         ),
-        backgroundColor: theme.colorScheme.primaryContainer,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextDisplayContainer(
-            inputText: appState.history,
-            textType: 1,
-          ),
-          TextDisplayContainer(
-            inputText: appState.textDisp,
-            textType: 2,
-          ),
-          TextDisplayContainer(
-            inputText: appState.shortDisplay,
-            textType: 3,
-          ),
-          const SizedBox(height: 10),
-          CalcKeys(
-            callback: calkeyOnClick,
-          ),
-          const SizedBox(height: 5),
-        ],
       ),
     );
   }

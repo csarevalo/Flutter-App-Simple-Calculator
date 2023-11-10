@@ -18,12 +18,14 @@ class TextDisplayContainer extends StatelessWidget {
     double edgBottom = 12;
     TextStyle? textStyle;
     int? maxLines;
+
+    edgRight = 26;
     switch (textType) {
       case 1:
         width = 350;
-        alignX = 0.6;
-        edgRight = 16;
-        edgBottom = 11;
+        alignX = 1;
+        edgRight = edgRight;
+        edgBottom = 10;
         maxLines = null;
         textStyle = TextStyle(
           fontFamily: 'Poppins',
@@ -32,8 +34,8 @@ class TextDisplayContainer extends StatelessWidget {
         );
       case 2:
         width = 350;
-        alignX = 0.6;
-        edgRight = 12;
+        alignX = 1;
+        edgRight = edgRight - 2;
         edgBottom = 3;
         maxLines = 1;
         textStyle = TextStyle(
@@ -43,8 +45,8 @@ class TextDisplayContainer extends StatelessWidget {
         );
       case 3:
         width = 380;
-        alignX = 0.6;
-        edgRight = 12;
+        alignX = 1;
+        edgRight = edgRight - 6;
         edgBottom = 12;
         maxLines = 1;
         textStyle = TextStyle(
